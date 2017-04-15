@@ -46,10 +46,11 @@
     UPDATE ${conf.table}
     <set>
     <#list columns as col>
-      <#if col.fieldName!="id" && col.fieldName!="gmtCreate" && col.fieldName!="gmtModified"><if test="${col.fieldName} != null">${col.columnName} = ${"#\{"+col.fieldName+"}"},</if></#if>
-    </#list>
+      <#if col.fieldName!="id" && col.fieldName!="gmtCreate" && col.fieldName!="gmtModified">
+      <if test="${col.fieldName} != null">${col.columnName} = ${"#\{"+col.fieldName+"}"},</if>
+      </#if></#list>
     </set>
-    where id = ${"#\{id}"}
+    WHERE id = ${"#\{id}"}
   </update>
 
 
