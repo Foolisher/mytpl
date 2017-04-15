@@ -1,19 +1,20 @@
 package mytpl;
 
+import lombok.Data;
+
 /**
  * <p>Created by wanggen/付笑 on 2017/4/14.
  *
  * @author wanggen
  * @date 2017/04/14
  */
-//@Data
-//@ToString
+@Data
 public class Column {
 
-	private String columnName;
-	private String fieldName;
-	private String dbType;
-	private String description;
+	private String columnName;    // sql column name
+	private String fieldName;     // java field name
+	private String dbType;        // db type eg. VARCHAR
+	private String description;   // column comment defined
 
 	public String fieldType() {
 		switch (dbType) {
@@ -28,6 +29,7 @@ public class Column {
 				return "Long";
 			case "BYTE":
 				return "Byte";
+			case "DATE":
 			case "DATETIME":
 			case "TIMESTAMP":
 				return "Date";
@@ -36,45 +38,4 @@ public class Column {
 		}
 	}
 
-	public String getColumnName() {
-		return columnName;
-	}
-
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
-	}
-
-	public String getFieldName() {
-		return fieldName;
-	}
-
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
-	}
-
-	public String getDbType() {
-		return dbType;
-	}
-
-	public void setDbType(String dbType) {
-		this.dbType = dbType;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "Column{" +
-				"columnName='" + columnName + '\'' +
-				", fieldName='" + fieldName + '\'' +
-				", dbType='" + dbType + '\'' +
-				", description='" + description + '\'' +
-				'}';
-	}
 }

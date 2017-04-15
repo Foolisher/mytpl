@@ -1,7 +1,6 @@
 package mytpl
 
 import com.google.common.base.CaseFormat
-import com.google.common.base.Joiner
 import com.google.common.io.Files
 import freemarker.template.Configuration
 import freemarker.template.TemplateExceptionHandler
@@ -22,8 +21,8 @@ class TemplateTest {
 
   public static void main(String[] args) {
 
-    withTableMeta({
-        // 转换ResultSet
+    withTableMeta(Conf.conf.table, {
+        // ResultSet --> JavaBean
       ResultSet rst ->
         try {
           return new Column(
@@ -33,11 +32,10 @@ class TemplateTest {
               description: rst.getString("REMARKS")
           )
         } catch (SQLException e) {
-          e.printStackTrace();
           throw new RuntimeException(e);
         }
     }, {
-        // 消费 list:JavaBean
+        // consume List<JavaBean> rows
       List<Column> columns ->
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
@@ -49,19 +47,19 @@ class TemplateTest {
         // Bean
         def beanFtl = cfg.getTemplate("Bean.ftl")
         StringWriter beanWriter = new StringWriter()
-        beanFtl.process(["columns": columns, "conf": Conf.conf, "Joiner": Joiner], beanWriter)
+        beanFtl.process(["columns": columns, "conf": Conf.conf], beanWriter)
         Files.write(beanWriter.toString(), new File("tmp/" + Conf.conf.bean + ".java"), Charset.defaultCharset())
 
         // Mapper.xml
         def mapperXmlFtl = cfg.getTemplate("Mapper.ftl")
         StringWriter mapperXmlWriter = new StringWriter()
-        mapperXmlFtl.process(["columns": columns, "conf": Conf.conf, "Joiner": Joiner], mapperXmlWriter)
+        mapperXmlFtl.process(["columns": columns, "conf": Conf.conf], mapperXmlWriter)
         Files.write(mapperXmlWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.xml"), Charset.defaultCharset())
 
         // Mapper
         def mapperFtl = cfg.getTemplate("MapperJava.ftl")
         StringWriter mapperWriter = new StringWriter()
-        mapperFtl.process(["columns": columns, "conf": Conf.conf, "Joiner": Joiner], mapperWriter)
+        mapperFtl.process(["columns": columns, "conf": Conf.conf], mapperWriter)
         Files.write(mapperWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.java"), Charset.defaultCharset())
 
 

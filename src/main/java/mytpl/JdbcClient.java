@@ -5,6 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -20,49 +21,47 @@ import lombok.Cleanup;
  */
 public class JdbcClient {
 
-	public static <T> void execute(String sql, Function<ResultSet, T> trans, Consumer<List<T>> consumer) {
+	public static <T> void executeQuery(String sql, Function<ResultSet, T> trans, Consumer<List<T>> consumer) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver"); //MYSQL驱动
-
 			@Cleanup
-			Connection conn = DriverManager.getConnection(Conf.conf.dbUrl, Conf.conf.dbUser,
-					Conf.conf.dbPassword); //链接本地MYSQL
+			Connection conn = getConnection();
 			@Cleanup
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			@Cleanup
 			ResultSet resultSet = preparedStatement.executeQuery();
-
 			List<T> rows = Lists.newArrayList();
 			while (resultSet.next()) {
 				rows.add(trans.apply(resultSet));
 			}
 			consumer.accept(rows);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 
 	}
 
-	public static <T> void withTableMeta(Function<ResultSet, T> trans, Consumer<List<T>> consumer) {
+	public static <T> void withTableMeta(String table, Function<ResultSet, T> trans, Consumer<List<T>> consumer) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver"); //MYSQL驱动
-
 			@Cleanup
-			Connection conn = DriverManager.getConnection(Conf.conf.dbUrl, Conf.conf.dbUser, Conf.conf.dbPassword); //链接本地MYSQL
-			DatabaseMetaData metaData  = conn.getMetaData();
+			Connection conn = getConnection();
+			DatabaseMetaData metaData = conn.getMetaData();
 			@Cleanup
-			ResultSet        resultSet = metaData.getColumns(null, null, Conf.conf.table, null);
-			List<T>          rows      = Lists.newArrayList();
+			ResultSet resultSet = metaData.getColumns(null, null, table, null);
+			List<T> rows = Lists.newArrayList();
 			while (resultSet.next()) {
 				rows.add(trans.apply(resultSet));
 			}
 			consumer.accept(rows);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	private static Connection getConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.jdbc.Driver");
+		return DriverManager.getConnection(Conf.conf.dbUrl, Conf.conf.dbUser,
+				Conf.conf.dbPassword);
 	}
 
 }

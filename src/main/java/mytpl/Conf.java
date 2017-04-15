@@ -1,10 +1,14 @@
 package mytpl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
+import lombok.Cleanup;
+import lombok.Data;
 import org.yaml.snakeyaml.Yaml;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * <p>Created by wanggen/付笑 on 2017/4/15.
@@ -12,19 +16,20 @@ import org.yaml.snakeyaml.Yaml;
  * @author wanggen
  * @date 2017/04/15
  */
+@Data
 public class Conf {
 
-	public static Conf conf = new Conf();
+	public static Conf conf = null;
 
 	static {
-		FileReader fr = null;
 		try {
-			fr = new FileReader(new File("").getAbsolutePath() + "/conf.yaml");
+			@Cleanup
+			FileReader fr = new FileReader(new File("").getAbsolutePath() + "/conf.yaml");
 			Yaml yaml = new Yaml();
 			Conf.conf = yaml.loadAs(fr, Conf.class);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			checkNotNull(Conf.conf);
+		} catch (IOException e2) {
+			throw new RuntimeException(e2);
 		}
 	}
 
@@ -32,40 +37,9 @@ public class Conf {
 	public String dbUser;
 	public String dbPassword;
 
-	public String beanPackage;
-	public String mapperPackage;
-	public String table;
-	public String bean;
+	public  String beanPackage;     // path
+	public  String mapperPackage;   // path
+	public  String table;           // to generated table name
+	private String bean;            // associated java bean simple file name
 
-	public static Conf getConf() {
-		return conf;
-	}
-
-	public String getDbUrl() {
-		return dbUrl;
-	}
-
-	public String getDbUser() {
-		return dbUser;
-	}
-
-	public String getDbPassword() {
-		return dbPassword;
-	}
-
-	public String getBeanPackage() {
-		return beanPackage;
-	}
-
-	public String getMapperPackage() {
-		return mapperPackage;
-	}
-
-	public String getTable() {
-		return table;
-	}
-
-	public String getBean() {
-		return bean;
-	}
 }
