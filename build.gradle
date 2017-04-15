@@ -1,0 +1,38 @@
+group 'github'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+
+allprojects {
+
+  repositories {
+    mavenLocal()
+    maven {
+      url 'http://maven.aliyun.com/nexus/content/groups/public'
+    }
+    maven {
+      url 'http://mvnrepo.alibaba-inc.com/mvn/repository'
+    }
+  }
+
+}
+
+
+dependencies {
+
+
+  compile("com.google.guava:guava-parent:20.0")
+  compile('mysql:mysql-connector-java:5.1.40')
+  compile('org.apache.velocity:velocity:1.7')
+  compile('org.freemarker:freemarker:2.3.23')
+  compile('org.yaml:snakeyaml:1.17')
+
+  compile('org.projectlombok:lombok:1.16.8')
+
+  compile 'org.codehaus.groovy:groovy-all:2.3.11'
+  testCompile group: 'junit', name: 'junit', version: '4.11'
+}

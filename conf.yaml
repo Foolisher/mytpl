@@ -1,0 +1,13 @@
+
+
+dbUrl:
+dbUser:
+dbPassword:
+
+resourceRoot: "/Users/wanggen/IdeaProjects/mytpl/src/main/resources"
+
+beanPackage: "com.taobao.gow.bean"
+mapperPackage: "com.taobao.gow.mapper"
+
+table: "benefit_rule"
+bean: "BenefitRuleDO"
