@@ -1,3 +1,5 @@
+package ${conf.mapperPackage};
+
 import java.util.Map;
 
 /**

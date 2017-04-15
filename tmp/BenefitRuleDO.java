@@ -8,7 +8,7 @@ import lombok.Data;
  * @author
  */
 @Data
-public class InventorySellerDataDO extends BaseDO {
+public class BenefitRuleDO extends BaseDO {
 
     private Integer  id;             // 主键
     private Date     gmtCreate;      // 创建时间
