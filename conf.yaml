@@ -1,11 +1,11 @@
 
 
-dbUrl:      "jdbc:mysql://tddl.daily.alibaba.net:3306"
-dbUser:     "GOW_APP"
-dbPassword: "123"
+dbUrl:      jdbc:mysql://tddl.daily.alibaba.net:3306
+dbUser:     GOW_APP
+dbPassword: 123
 
-beanPackage: "com.taobao.gow.bean"
-mapperPackage: "com.taobao.gow.mapper"
+beanPackage:    com.taobao.gow.bean
+mapperPackage:  com.taobao.gow.mapper
 
-table: "beidou_market"
-bean: "BeidouMarket"
+table:  beidou_market
+bean:   BeidouMarket
