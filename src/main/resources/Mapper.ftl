@@ -20,15 +20,13 @@
   </insert>
 
   <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Long">
-    SELECT
-    <include refid="Base_Column_List"/>
+    SELECT <include refid="Base_Column_List"/>
       FROM ${conf.table}
     WHERE id = ${"#\{id}"}
   </select>
 
   <select id="queryBy" resultMap="BaseResultMap" parameterType="map">
-    SELECT
-    <include refid="Base_Column_List"/>
+    SELECT <include refid="Base_Column_List"/>
     FROM ${conf.table}
     <where>
     <#list columns as col>

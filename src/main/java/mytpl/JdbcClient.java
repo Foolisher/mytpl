@@ -51,6 +51,7 @@ public class JdbcClient {
 			@Cleanup
 			Connection conn = DriverManager.getConnection(Conf.conf.dbUrl, Conf.conf.dbUser, Conf.conf.dbPassword); //链接本地MYSQL
 			DatabaseMetaData metaData  = conn.getMetaData();
+			@Cleanup
 			ResultSet        resultSet = metaData.getColumns(null, null, Conf.conf.table, null);
 			List<T>          rows      = Lists.newArrayList();
 			while (resultSet.next()) {
