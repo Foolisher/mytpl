@@ -16,7 +16,7 @@ public class Column {
 	private String dbType;        // db type eg. VARCHAR
 	private String description;   // column comment defined
 
-	public String fieldType() {
+	public String fieldType() {		// dbType name --> javaType name
 		switch (dbType) {
 			case "VARCHAR":
 			case "TEXT":
