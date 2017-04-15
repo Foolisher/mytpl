@@ -7,19 +7,15 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="DATETIME"/>
     <result column="status" property="status" jdbcType="TINYINT"/>
     <result column="operator" property="operator" jdbcType="VARCHAR"/>
-    <result column="features" property="features" jdbcType="VARCHAR"/>
-    <result column="group_id" property="groupId" jdbcType="BIGINT"/>
-    <result column="description" property="description" jdbcType="VARCHAR"/>
-    <result column="name" property="name" jdbcType="VARCHAR"/>
   </resultMap>
 
   <sql id="Base_Column_List">
-    gmt_create, gmt_modified, status, operator, features, group_id, description, name
+    gmt_create, gmt_modified, status,
   </sql>
 
   <insert id="insert" parameterType="com.taobao.gow.bean.BenefitRuleDO" keyProperty="id" useGeneratedKeys="true">
     INSERT INTO benefit_rule (<include refid="Base_Column_List"/>)
-    VALUES (NOW(), NOW(), #{status}, #{operator}, #{features}, #{groupId}, #{description}, #{name})
+    VALUES (NOW(), NOW(), #{status})
   </insert>
 
   <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -38,11 +34,6 @@
       <if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
       <if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
       <if test="status != null">and status = #{status}</if>
-      <if test="operator != null">and operator = #{operator}</if>
-      <if test="features != null">and features = #{features}</if>
-      <if test="groupId != null">and group_id = #{groupId}</if>
-      <if test="description != null">and description = #{description}</if>
-      <if test="name != null">and name = #{name}</if>
     </where>
   </select>
 
@@ -55,11 +46,6 @@
     UPDATE benefit_rule
     <set>
       <if test="status != null">status = #{status},</if>
-      <if test="operator != null">operator = #{operator},</if>
-      <if test="features != null">features = #{features},</if>
-      <if test="groupId != null">group_id = #{groupId},</if>
-      <if test="description != null">description = #{description},</if>
-      <if test="name != null">name = #{name},</if>
     </set>
     where id = #{id}
   </update>
