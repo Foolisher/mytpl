@@ -1,13 +1,11 @@
 
 
-dbUrl:
-dbUser:
-dbPassword:
-
-resourceRoot: "/Users/wanggen/IdeaProjects/mytpl/src/main/resources"
+dbUrl:      "jdbc:mysql://tddl.daily.alibaba.net:3306"
+dbUser:     "GOW_APP"
+dbPassword: "123"
 
 beanPackage: "com.taobao.gow.bean"
 mapperPackage: "com.taobao.gow.mapper"
 
-table: "benefit_rule"
-bean: "BenefitRuleDO"
+table: "beidou_market"
+bean: "BeidouMarket"

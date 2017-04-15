@@ -23,6 +23,7 @@ class TemplateTest {
   public static void main(String[] args) {
 
     withTableMeta({
+        // 转换ResultSet
       ResultSet rst ->
         try {
           return new Column(
@@ -36,10 +37,11 @@ class TemplateTest {
           throw new RuntimeException(e);
         }
     }, {
+        // 消费 list:JavaBean
       List<Column> columns ->
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        cfg.setDirectoryForTemplateLoading(new File(Conf.conf.resourceRoot));
+        cfg.setDirectoryForTemplateLoading(new File(new File("").getAbsolutePath() + "/src/main/resources"));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);

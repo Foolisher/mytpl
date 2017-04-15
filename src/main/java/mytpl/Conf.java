@@ -31,7 +31,6 @@ public class Conf {
 	public String dbUrl;
 	public String dbUser;
 	public String dbPassword;
-	public String resourceRoot;
 
 	public String beanPackage;
 	public String mapperPackage;
@@ -52,10 +51,6 @@ public class Conf {
 
 	public String getDbPassword() {
 		return dbPassword;
-	}
-
-	public String getResourceRoot() {
-		return resourceRoot;
 	}
 
 	public String getBeanPackage() {

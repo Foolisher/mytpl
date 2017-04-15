@@ -18,6 +18,7 @@ public class Column {
 	public String fieldType() {
 		switch (dbType) {
 			case "VARCHAR":
+			case "TEXT":
 				return "String";
 			case "BIGINT":
 				return "Integer";
@@ -28,6 +29,7 @@ public class Column {
 			case "BYTE":
 				return "Byte";
 			case "DATETIME":
+			case "TIMESTAMP":
 				return "Date";
 			default:
 				throw new RuntimeException("找不到的类型: " + dbType);
