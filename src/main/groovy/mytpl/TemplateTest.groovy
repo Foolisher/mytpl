@@ -5,11 +5,11 @@ import com.google.common.io.Files
 import freemarker.template.Configuration
 import freemarker.template.TemplateExceptionHandler
 
-import java.nio.charset.Charset
 import java.sql.ResultSet
 import java.sql.SQLException
 
-import static mytpl.JdbcClient.withTableMeta
+import static java.nio.charset.Charset.defaultCharset
+import static mytpl.JdbcClient.getTableMeta
 
 /**
  *
@@ -19,9 +19,9 @@ import static mytpl.JdbcClient.withTableMeta
  */
 class TemplateTest {
 
-  public static void main(String[] args) {
+  static void main(String[] args) {
 
-    withTableMeta(Conf.conf.table, {
+    def columns = getTableMeta(Conf.conf.table, {
         // ResultSet --> JavaBean
       ResultSet rst ->
         try {
@@ -34,36 +34,31 @@ class TemplateTest {
         } catch (SQLException e) {
           throw new RuntimeException(e);
         }
-    }, {
-        // consume List<JavaBean> rows
-      List<Column> columns ->
-
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        cfg.setDirectoryForTemplateLoading(new File(new File("").getAbsolutePath() + "/src/main/resources"));
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-
-        // Bean
-        def beanFtl = cfg.getTemplate("Bean.ftl")
-        StringWriter beanWriter = new StringWriter()
-        beanFtl.process(["columns": columns, "conf": Conf.conf], beanWriter)
-        Files.write(beanWriter.toString(), new File("tmp/" + Conf.conf.bean + ".java"), Charset.defaultCharset())
-
-        // Mapper.xml
-        def mapperXmlFtl = cfg.getTemplate("Mapper.ftl")
-        StringWriter mapperXmlWriter = new StringWriter()
-        mapperXmlFtl.process(["columns": columns, "conf": Conf.conf], mapperXmlWriter)
-        Files.write(mapperXmlWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.xml"), Charset.defaultCharset())
-
-        // Mapper
-        def mapperFtl = cfg.getTemplate("MapperJava.ftl")
-        StringWriter mapperWriter = new StringWriter()
-        mapperFtl.process(["columns": columns, "conf": Conf.conf], mapperWriter)
-        Files.write(mapperWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.java"), Charset.defaultCharset())
-
-
     });
+
+    Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
+    cfg.setDirectoryForTemplateLoading(new File("src/main/resources"));
+    cfg.setDefaultEncoding("UTF-8");
+    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+    cfg.setLogTemplateExceptions(false);
+
+    // Bean
+    def beanFtl = cfg.getTemplate("Bean.ftl")
+    StringWriter beanWriter = new StringWriter()
+    beanFtl.process(["columns": columns, "conf": Conf.conf], beanWriter)
+    Files.write(beanWriter.toString(), new File("tmp/" + Conf.conf.bean + ".java"), defaultCharset())
+
+    // Mapper.xml
+    def mapperXmlFtl = cfg.getTemplate("Mapper.ftl")
+    StringWriter mapperXmlWriter = new StringWriter()
+    mapperXmlFtl.process(["columns": columns, "conf": Conf.conf], mapperXmlWriter)
+    Files.write(mapperXmlWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.xml"), defaultCharset())
+
+    // Mapper
+    def mapperFtl = cfg.getTemplate("MapperJava.ftl")
+    StringWriter mapperWriter = new StringWriter()
+    mapperFtl.process(["columns": columns, "conf": Conf.conf], mapperWriter)
+    Files.write(mapperWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.java"), defaultCharset())
 
 
   }

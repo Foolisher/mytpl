@@ -3,8 +3,8 @@ package ${conf.beanPackage};
 import lombok.Data;
 
 /**
- * @Desc:
- * <p/>
+ * <p>描述:</p>
+ *
  * @author
  */
 @Data

@@ -13,20 +13,20 @@ public class Column {
 
 	private String columnName;    // sql column name
 	private String fieldName;     // java field name
-	private String dbType;        // db type eg. VARCHAR
-	private String description;   // column comment defined
+	private String dbType;        // db type like VARCHAR
+	private String description;   // column comment
 
-	public String fieldType() {		// dbType name --> javaType name
+	public String fieldType() {    // dbType name --> javaType name
 		switch (dbType) {
 			case "VARCHAR":
 			case "TEXT":
 				return "String";
 			case "BIGINT":
-				return "Integer";
+				return "Long";
 			case "INT":
 			case "SMALLINT":
 			case "TINYINT":
-				return "Long";
+				return "Integer";
 			case "BYTE":
 				return "Byte";
 			case "DATE":

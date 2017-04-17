@@ -1,14 +1,14 @@
 package mytpl;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
-import lombok.Cleanup;
+import com.google.common.io.Files;
 import lombok.Data;
 import org.yaml.snakeyaml.Yaml;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.nio.charset.Charset.defaultCharset;
 
 /**
  * <p>Created by wanggen/付笑 on 2017/4/15.
@@ -23,11 +23,7 @@ public class Conf {
 
 	static {
 		try {
-			@Cleanup
-			FileReader fr = new FileReader(new File("").getAbsolutePath() + "/conf.yaml");
-			Yaml yaml = new Yaml();
-			Conf.conf = yaml.loadAs(fr, Conf.class);
-			checkNotNull(Conf.conf);
+			Conf.conf = checkNotNull(new Yaml().loadAs(Files.toString(new File("conf.yaml"), defaultCharset()), Conf.class));
 		} catch (IOException e2) {
 			throw new RuntimeException(e2);
 		}
@@ -37,9 +33,9 @@ public class Conf {
 	public String dbUser;
 	public String dbPassword;
 
-	public  String beanPackage;     // path
-	public  String mapperPackage;   // path
-	public  String table;           // to generated table name
-	private String bean;            // associated java bean simple file name
+	public String beanPackage;     // path
+	public String mapperPackage;   // path
+	public String table;           // to generated table name
+	public String bean;            // associated java bean simple file name
 
 }
