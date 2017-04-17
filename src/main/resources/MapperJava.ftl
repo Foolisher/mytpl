@@ -3,7 +3,7 @@ package ${conf.mapperPackage};
 import java.util.Map;
 
 /**
- * <p>描述:</p>
+ * <p>描述: </p>
  *
  * @author
  */

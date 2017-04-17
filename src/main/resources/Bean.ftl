@@ -3,7 +3,7 @@ package ${conf.beanPackage};
 import lombok.Data;
 
 /**
- * <p>描述:</p>
+ * <p>描述: </p>
  *
  * @author
  */
