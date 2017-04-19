@@ -33,8 +33,7 @@ public class Conf {
 	public String dbUser;
 	public String dbPassword;
 
-	public String beanPackage;     // path
-	public String mapperPackage;   // path
+	public String basePackage;     // path
 	public String table;           // to generated table name
 	public String bean;            // associated java bean simple file name
 

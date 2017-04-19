@@ -4,8 +4,7 @@ dbUrl:      jdbc:mysql://tddl.daily.alibaba.net:3306
 dbUser:     GOW_APP
 dbPassword: 123
 
-beanPackage:    com.taobao.gow.bean
-mapperPackage:  com.taobao.gow.mapper
+basePackage:    com.taobao.gow.rule
 
 table:  beidou_market
 bean:   BeidouMarket

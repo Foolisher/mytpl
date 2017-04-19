@@ -60,6 +60,18 @@ class TemplateTest {
     mapperFtl.process(["columns": columns, "conf": Conf.conf], mapperWriter)
     Files.write(mapperWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.java"), defaultCharset())
 
+    // Service
+    def serviceFtl = cfg.getTemplate("Service.ftl")
+    StringWriter serviceWriter = new StringWriter()
+    serviceFtl.process(["columns": columns, "conf": Conf.conf], serviceWriter)
+    Files.write(serviceWriter.toString(), new File("tmp/" + Conf.conf.bean + "Service.java"), defaultCharset())
+
+    // ServiceImpl
+    def serviceImplFtl = cfg.getTemplate("ServiceImpl.ftl")
+    StringWriter serviceImplWriter = new StringWriter()
+    serviceImplFtl.process(["columns": columns, "conf": Conf.conf], serviceImplWriter)
+    Files.write(serviceImplWriter.toString(), new File("tmp/" + Conf.conf.bean + "ServiceImpl.java"), defaultCharset())
+
 
   }
 

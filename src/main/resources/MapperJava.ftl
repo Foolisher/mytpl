@@ -1,4 +1,4 @@
-package ${conf.mapperPackage};
+package ${conf.basePackage}.mapper;
 
 import java.util.Map;
 

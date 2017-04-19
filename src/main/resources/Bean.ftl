@@ -1,4 +1,4 @@
-package ${conf.beanPackage};
+package ${conf.basePackage}.bean;
 
 import lombok.Data;
 
