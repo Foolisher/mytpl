@@ -25,7 +25,7 @@ public class ${conf.bean}ServiceImpl implements ${conf.bean}Service {
 	@Override
 	public Result<Long> save(${conf.bean} ${conf.bean?uncap_first}) {
 		${mapper}.insert(${conf.bean?uncap_first});
-  		return entity.getId();
+    	return entity.getId();
 	}
 
 	@Override
