@@ -20,6 +20,7 @@ public class Column {
 		switch (dbType) {
 			case "VARCHAR":
 			case "TEXT":
+			case "LONGTEXT":
 				return "String";
 			case "BIGINT":
 				return "Long";
