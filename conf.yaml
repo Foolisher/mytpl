@@ -1,10 +1,12 @@
 
-
+# 这里按自己数据源修改
 dbUrl:      jdbc:mysql://tddl.daily.alibaba.net:3306
 dbUser:     GOW_APP
 dbPassword: 123
 
+# 生成的module package
 basePackage:    com.taobao.gow.rule
 
+# 这里按自己的表名，beanName适当修改
 table:  beidou_market
 bean:   BeidouMarket
