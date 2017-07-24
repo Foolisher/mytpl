@@ -21,12 +21,14 @@ public class Column {
 			case "VARCHAR":
 			case "TEXT":
 			case "LONGTEXT":
+			case "LONGVARCHAR":
 				return "String";
 			case "BIGINT":
 				return "Long";
 			case "INT":
 			case "SMALLINT":
 			case "TINYINT":
+			case "INTEGER":
 				return "Integer";
 			case "BYTE":
 				return "Byte";
@@ -39,9 +41,5 @@ public class Column {
 		}
 	}
 
-
-	public String getDbType() {
-		return dbType.equalsIgnoreCase("DATETIME") ? "TIMESTAMP" : dbType;
-	}
 
 }
