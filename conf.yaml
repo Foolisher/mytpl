@@ -5,8 +5,8 @@ dbUser:     GOW_APP
 dbPassword: 123
 
 # 生成的module package
-basePackage:    com.taobao.gow.rule
+basePackage:    com.taobao.market
 
 # 这里按自己的表名，beanName适当修改
-table:  beidou_market
-bean:   BeidouMarket
+table:  mk_analysis_template
+bean:   MkAnalysisTemplate

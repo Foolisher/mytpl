@@ -39,4 +39,9 @@ public class Column {
 		}
 	}
 
+
+	public String getDbType() {
+		return dbType.equalsIgnoreCase("DATETIME") ? "TIMESTAMP" : dbType;
+	}
+
 }
