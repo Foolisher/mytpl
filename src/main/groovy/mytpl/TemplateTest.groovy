@@ -4,7 +4,9 @@ import com.google.common.base.CaseFormat
 import com.google.common.io.Files
 import freemarker.template.Configuration
 import freemarker.template.TemplateExceptionHandler
+import org.apache.ibatis.type.JdbcType
 
+import java.sql.JDBCType
 import java.sql.ResultSet
 import java.sql.SQLException
 
@@ -28,7 +30,7 @@ class TemplateTest {
           return new Column(
               columnName: rst.getString("COLUMN_NAME"),
               fieldName: CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rst.getString("COLUMN_NAME")),
-              dbType: java.sql.JDBCType.valueOf(rst.getInt("DATA_TYPE")).name,
+              dbType: JdbcType.forCode(rst.getInt("DATA_TYPE")).name(),
               description: rst.getString("REMARKS")
           )
         } catch (SQLException e) {
