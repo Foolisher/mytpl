@@ -20,18 +20,19 @@
   </insert>
 
   <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Long">
-    SELECT <include refid="Base_Column_List"/>
+    SELECT id,<include refid="Base_Column_List"/>
       FROM ${conf.table}
     WHERE id = ${"#\{id}"}
   </select>
 
   <select id="queryBy" resultMap="BaseResultMap" parameterType="map">
-    SELECT <include refid="Base_Column_List"/>
+    SELECT id,<include refid="Base_Column_List"/>
     FROM ${conf.table}
     <where>
     <#list columns as col>
+      <#if col.fieldName!="features" && col.fieldName!="description">
       <if test="${col.fieldName} != null">and ${col.columnName} = ${"#\{"+col.fieldName+"}"}</if>
-    </#list>
+      </#if></#list>
     </where>
   </select>
 
