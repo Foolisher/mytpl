@@ -1,6 +1,8 @@
 # mytpl
 mybatis代码生成(ali)
 
+1. 每次使用前请 git update
+
 ## 配置Lombok
 
 1. Preferences...

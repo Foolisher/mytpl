@@ -38,9 +38,13 @@
     SELECT id,<include refid="Base_Column_List"/>
     FROM ${conf.table}
     <include refid="Where_Clause"/>
+    <if test="limit != null">
+      <if test="offset != null">limit ${offset}, ${limit}</if>
+      <if test="offset == null">limit ${limit}</if>
+    </if>
   </select>
 
-  <delete id="deleteById" parameterType="java.lang.Long">
+  <delete id="deleteById" parameterType="long">
     DELETE FROM ${conf.table}
     WHERE id = ${"#\{id}"}
   </delete>
