@@ -39,8 +39,8 @@
     FROM ${conf.table}
     <include refid="Where_Clause"/>
     <if test="limit != null">
-      <if test="offset != null">limit ${offset}, ${limit}</if>
-      <if test="offset == null">limit ${limit}</if>
+      <if test="offset != null">limit ${"$\{offset}, $\{limit}"}</if>
+      <if test="offset == null">limit ${"$\{limit}"}</if>
     </if>
   </select>
 
