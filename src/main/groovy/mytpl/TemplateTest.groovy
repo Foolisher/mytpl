@@ -38,6 +38,9 @@ class TemplateTest {
         }
     });
 
+    def maxFiledLen = columns.max { col -> col.columnName.length() }.columnName.length()
+    def maxFiledTypeLen = columns.max { col -> col.fieldType().length() }.columnName.length()
+
     Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
     cfg.setDirectoryForTemplateLoading(new File("src/main/resources"));
     cfg.setDefaultEncoding("UTF-8");
@@ -47,7 +50,7 @@ class TemplateTest {
     // Bean
     def beanFtl = cfg.getTemplate("Bean.ftl")
     StringWriter beanWriter = new StringWriter()
-    beanFtl.process(["columns": columns, "conf": Conf.conf], beanWriter)
+    beanFtl.process(["columns": columns, "conf": Conf.conf, "maxFiledLen": maxFiledLen, "maxFiledTypeLen": maxFiledTypeLen], beanWriter)
     Files.write(beanWriter.toString(), new File("tmp/" + Conf.conf.bean + ".java"), defaultCharset())
 
     // Mapper.xml

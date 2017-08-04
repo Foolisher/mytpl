@@ -25,15 +25,19 @@
     WHERE id = ${"#\{id}"}
   </select>
 
+  <sql id="Where_Clause">
+    <where>
+    <#list columns as col>
+    <#if col.fieldName!="features" && col.fieldName!="description">
+      <if test="${col.fieldName} != null">and ${col.columnName} = ${"#\{"+col.fieldName+"}"}</if>
+    </#if></#list>
+    </where>
+  </sql>
+
   <select id="queryBy" resultMap="BaseResultMap" parameterType="map">
     SELECT id,<include refid="Base_Column_List"/>
     FROM ${conf.table}
-    <where>
-    <#list columns as col>
-      <#if col.fieldName!="features" && col.fieldName!="description">
-      <if test="${col.fieldName} != null">and ${col.columnName} = ${"#\{"+col.fieldName+"}"}</if>
-      </#if></#list>
-    </where>
+    <include refid="Where_Clause"/>
   </select>
 
   <delete id="deleteById" parameterType="java.lang.Long">
