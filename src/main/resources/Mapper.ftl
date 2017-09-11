@@ -34,6 +34,12 @@
     </where>
   </sql>
 
+  <select id="countBy" resultType="int" parameterType="map">
+    SELECT COUNT(1)
+      FROM ${conf.table}
+    <include refid="Where_Clause"/>
+  </select>
+
   <select id="queryBy" resultMap="BaseResultMap" parameterType="map">
     SELECT id,<include refid="Base_Column_List"/>
     FROM ${conf.table}

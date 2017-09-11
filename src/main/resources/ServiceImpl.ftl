@@ -35,7 +35,7 @@ public class ${conf.bean}ServiceImpl implements ${conf.bean}Service {
 	}
 
 	@Override
-	public Result<List<InventoryTaskDO>> queryBy() {
+	public Result<List<${conf.bean}>> queryBy() {
 		return Result.onSuccess(${mapper}.queryBy(new HashMap()));
 	}
 
