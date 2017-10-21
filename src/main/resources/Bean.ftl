@@ -8,7 +8,7 @@ import lombok.Data;
  * @author
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, of={})
 @ToString(callSuper = true)
 public class ${conf.bean} extends BaseDO {
 
