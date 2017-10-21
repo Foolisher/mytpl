@@ -5,10 +5,10 @@ import lombok.Data;
 /**
  * <p>描述: </p>
  *
- * @author
+ * @author:
  */
 @Data
-@EqualsAndHashCode(callSuper = true, of={})
+@EqualsAndHashCode(callSuper = true, of={""})
 @ToString(callSuper = true)
 public class ${conf.bean} extends BaseDO {
 
