@@ -6,7 +6,6 @@ import freemarker.template.Configuration
 import freemarker.template.TemplateExceptionHandler
 import org.apache.ibatis.type.JdbcType
 
-import java.sql.JDBCType
 import java.sql.ResultSet
 import java.sql.SQLException
 
@@ -39,7 +38,7 @@ class TemplateTest {
     });
 
     def maxFiledLen = columns.max { col -> col.columnName.length() }.columnName.length()
-    def maxFiledTypeLen = columns.max { col -> col.fieldType().length() }.columnName.length()
+    def maxFiledTypeLen = columns.max { col -> col.fieldType().length() }.columnName.length()+1;
 
     Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
     cfg.setDirectoryForTemplateLoading(new File("src/main/resources"));
