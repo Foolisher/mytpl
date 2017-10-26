@@ -30,7 +30,7 @@ class TemplateTest {
               columnName: rst.getString("COLUMN_NAME"),
               fieldName: CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rst.getString("COLUMN_NAME")),
               dbType: JdbcType.forCode(rst.getInt("DATA_TYPE")).name(),
-              description: rst.getString("REMARKS")
+              description: rst.getString("REMARKS").replace("\n", "/")
           )
         } catch (SQLException e) {
           throw new RuntimeException(e);
