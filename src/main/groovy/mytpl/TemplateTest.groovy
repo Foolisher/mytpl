@@ -37,8 +37,8 @@ class TemplateTest {
         }
     });
 
-    def maxFiledLen = columns.max { col -> col.columnName.length() }.columnName.length()
-    def maxFiledTypeLen = columns.max { col -> col.fieldType().length() }.columnName.length()+1;
+    def maxFiledLen = columns.max { col -> col.fieldName.length() }.fieldName.length()+1
+    def maxFiledTypeLen = columns.max { col -> col.fieldType().length() }.fieldType().length()+1
 
     Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
     cfg.setDirectoryForTemplateLoading(new File("src/main/resources"));
