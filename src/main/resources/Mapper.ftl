@@ -48,6 +48,7 @@
       <if test="offset != null">limit ${"$\{offset}, $\{limit}"}</if>
       <if test="offset == null">limit ${"$\{limit}"}</if>
     </if>
+    ORDER BY id DESC
   </select>
 
   <delete id="deleteById" parameterType="long">

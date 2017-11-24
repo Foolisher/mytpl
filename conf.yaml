@@ -5,8 +5,8 @@ dbUser:     GOW_APP
 dbPassword: 123
 
 # 生成的module package
-basePackage:    com.taobao.market
+basePackage:    com.taobao.tianchi
 
 # 这里按自己的表名，beanName适当修改
-table:  mk_analysis_template
-bean:   MkAnalysisTemplate
+table:  tianchi_rule_tenancy
+bean: RuleTenancyRelationDO
