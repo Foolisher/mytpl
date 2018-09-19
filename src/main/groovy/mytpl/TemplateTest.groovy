@@ -54,6 +54,9 @@ class TemplateTest {
 
     // Mapper.xml
     def mapperXmlFtl = cfg.getTemplate("Mapper.ftl")
+    if(Conf.conf.type=='ibatis'){
+      mapperXmlFtl = cfg.getTemplate("IbatisMapper.ftl")
+    }
     StringWriter mapperXmlWriter = new StringWriter()
     mapperXmlFtl.process(["columns": columns, "conf": Conf.conf], mapperXmlWriter)
     Files.write(mapperXmlWriter.toString(), new File("tmp/" + Conf.conf.bean + "Mapper.xml"), defaultCharset())
